@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<center><h1 class = "mt-4">MENU</h1></center>
+<hr style="border: none; height: 1px; background-color: #333; margin: 20px 0;" />
+  {% if location %}
+   <iframe id="location_frame" src="{{location}}" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  {% endif %}
+
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+      <form>
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <center>Filter</center>
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+       <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+  <input type="checkbox" class="btn-check" id="btncheck1" value="veg" name = "vegetarian">
+  <label class="btn btn-outline-success" for="btncheck1">Vegetarian</label>
+
+  <input type="checkbox"  class="btn-check " id="btncheck2" value = "nonveg" name = "vegetarian">
+  <label class="btn btn-outline-danger" for="btncheck2">Non-Vegetarian</label>
+
+           <br/>
+
+  <div class="form-outline" data-mdb-input-init>
+    <input id="search-input" type="search" name = "search_food-item" id="form1"  class="form-control mx-4" placeholder="Search Food-Item"/>
+  </div>
+           <button type="submit" class="btn btn-primary mb-3 mx-4 ">Sort accordingly </button>
+
+
+   </div>
+      </div>
+
+    </div>
+
+
+   </form>
+</div>
+</div>
+
+
+
+<div class = "container mt-4">
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% for food_item in fooditems %}
+      <div class="col">
+        <div class="card shadow-sm">
+          <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{food_item.image_url}}"></img>
+          <center><h3 class="mt-3">{{food_item.name}}</h3></center>
+          <div class="card-body">
+              <p class="card-text">{{food_item.description}}</p>
+              <b><h5 class="card-text">{{food_item.restaurant.name}}</h5></b>
+              <div class="d-flex justify-content-between align-items-center">
+              <button class="btn btn-success">Add to cart<i class="fa-solid fa-cart-plus"></i></button>
+              <small class="text-muted"><h3>Rs.{{food_item.price}}</h3></small>
+              </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock content %}
