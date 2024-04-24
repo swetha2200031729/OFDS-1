@@ -5,6 +5,6 @@ from .models import *
 admin.site.register(FoodItem)
 admin.site.register(Restaurant)
 admin.site.register(Cuisine)
-
+admin.site.register(UserPhone)
 
 # Register your models here.

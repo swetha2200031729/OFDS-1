@@ -57,7 +57,33 @@ def logout_user(request):
     logout(request)
     return redirect("login")
 def signup_page(request):
+    if request.user.is_authenticated:
+        return redirect("homepage")
+    if request.method == "POST":
+        username = request.POST['username']
+        name = request.POSt['name']
+        password = request.POST['pwd']
+        confirm_password = request.POST['comfirmpassword']
+        phone_number = request.POST['phone']
+        email = request.POST['email']
+        address = request.POST['address']
+
+
+        if confirm_password != password:
+            redirect('signup')
+
+        user = User.objects.create_user(request,first_name = name, username=username,email = email,address = address, password=password)
+        user.save()
+        user_phone = UserPhone()
+        user_phone.user = user
+        user_phone.phone = phone_number
+        user_phone.save()
+        return redirect('login')
     return render(request,"signup.html")
 
 def user_profile(request):
-    return render(request,"userprofile.html")
+    if not request.user.is_authenticated:
+        return redirect('login')
+    user_phone = UserPhone.objects.get(user = request.user)
+    context = {'phone':user_phone.phone}
+    return render(request,"userprofile.html",context)

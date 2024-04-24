@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 class FoodItem(models.Model):
     name = models.CharField(max_length=100,null = False,unique=True)
@@ -25,5 +26,10 @@ class Restaurant(models.Model):
     def __str__(self):
         return self.name
 
+class UserPhone(models.Model):
+    user = models.OneToOneField(to = User, on_delete= models.CASCADE)
+    phone = models.CharField(max_length=10,unique=True)
+    def __str__(self):
+        return self.user.username
 
 #https://www.google.com/maps/embed/v1/place?q=place_id:ChIJv58o7br6NToROPPDiCZ-HTU&key=AIzaSyDYuTnqsw7E-uUMYCr4P9AJSnP353TxPLY
