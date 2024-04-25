@@ -61,9 +61,9 @@ def signup_page(request):
         return redirect("homepage")
     if request.method == "POST":
         username = request.POST['username']
-        name = request.POSt['name']
-        password = request.POST['pwd']
-        confirm_password = request.POST['comfirmpassword']
+        name = request.POST['name']
+        password = request.POST['password']
+        confirm_password = request.POST['confirmpassword']
         phone_number = request.POST['phone']
         email = request.POST['email']
         address = request.POST['address']
@@ -72,12 +72,15 @@ def signup_page(request):
         if confirm_password != password:
             redirect('signup')
 
-        user = User.objects.create_user(request,first_name = name, username=username,email = email,address = address, password=password)
+        user = User.objects.create_user( username=username,first_name = name ,email = email, password=password)
         user.save()
         user_phone = UserPhone()
         user_phone.user = user
         user_phone.phone = phone_number
-        user_phone.save()
+        try:
+            user_phone.save()
+        except:
+            user.delete()
         return redirect('login')
     return render(request,"signup.html")
 
@@ -87,3 +90,59 @@ def user_profile(request):
     user_phone = UserPhone.objects.get(user = request.user)
     context = {'phone':user_phone.phone}
     return render(request,"userprofile.html",context)
+def cart(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    cart_items = CartItem.objects.filter(user = request.user)
+    #add of subtotal
+    total_value = 0.0
+    total_items = 0
+    for cart_item in cart_items:
+        total_value +=  cart_item.subtotal
+        total_items += cart_item.quantity
+    context = {"cart_items" : cart_items , "total_value" : total_value ,"total_items" : total_items}
+    return render(request,"Cart.html",context)
+def add_item_to_cart(request,fooditem_id):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    fooditem = FoodItem.objects.get(id = fooditem_id)# at anycost only one item if lessthan 0 or more its an error
+    cart_item = CartItem.objects.filter(fooditem = fooditem,user = request.user).first() # u get a collection and firest value in it
+    if cart_item is None:
+        cart_item = CartItem()
+        cart_item.user = request.user
+        cart_item.fooditem = fooditem
+        cart_item.quantity = 1
+        cart_item.save()
+    else:
+        cart_item.quantity += 1
+        cart_item.save()
+    return redirect('cart')
+def remove_item_from_cart(request,fooditem_id):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    fooditem = FoodItem.objects.get(id = fooditem_id)
+    cart_items = CartItem.objects.filter(fooditem= fooditem,user = request.user)#for my understanding
+    cart_item =cart_items.first()
+    if cart_item:
+        if cart_item.quantity > 1:
+            cart_item.quantity -= 1
+            cart_item.save()
+        else:
+            cart_item.delete()
+    return redirect('cart')
+# feature to be added remove item completly
+def delete_item_from_cart(request,fooditem_id):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    fooditem = FoodItem.objects.get(id=fooditem_id)
+    cart_items = CartItem.objects.filter(fooditem=fooditem, user=request.user)  # for my understanding
+    cart_item = cart_items.first()
+    cart_item.delete()
+    return redirect('cart')
+
+def ordersuccessful(request):
+    return render(request,"ordersuccessful.html")
+def aboutus(request):
+    return render(request,"About.html")
+def checkout(request):
+    return render(request,"checkout.html")

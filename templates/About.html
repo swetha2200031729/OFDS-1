@@ -1,5 +1,56 @@
 {% extends 'base.html' %}
-{% load static %}
-{% block content %}
 
+{% block content %}
+ {% load static %}
+<section class="container my-5">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Welcome to Foodie!</h2>
+      <p>At Foodie, we are passionate about delivering delicious meals right to your doorstep. Our mission is to provide convenient and high-quality food delivery services that satisfy your cravings and make mealtime hassle-free.</p>
+    </div>
+    <div class="col-md-6">
+      <img src="{% static '/images/home1.jpg' %}" class="img-fluid rounded" alt="About Us Image 1">
+    </div>
+  </div>
+</section>
+
+<section class="bg-light">
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="{% static '/images/home1.jpg' %}" class="img-fluid rounded" alt="About Us Image 2">
+      </div>
+      <div class="col-md-6">
+        <h2>Our Story</h2>
+        <p>Foodie was founded with a simple yet powerful idea: to make ordering food as easy as possible. Our journey began with a small team of food enthusiasts who wanted to connect people with their favorite restaurants and cuisines, all from the comfort of their homes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container my-5">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Our Values</h2>
+      <p>At Foodie, we believe in transparency, quality, and customer satisfaction. We work closely with our restaurant partners to ensure that every meal is prepared with care using fresh ingredients. Your trust is important to us, and we strive to exceed your expectations with every order.</p>
+    </div>
+    <div class="col-md-6">
+      <img src="{% static '/images/home1.jpg' %}" class="img-fluid rounded" alt="About Us Image 3">
+    </div>
+  </div>
+</section>
+
+<section class="bg-light">
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="{% static '/images/home1.jpg' %}" class="img-fluid rounded" alt="About Us Image 4">
+      </div>
+      <div class="col-md-6">
+        <h2>Join Us Today</h2>
+        <p>Ready to experience the convenience of Foodie? Browse our menu, place your order, and sit back while we take care of the rest. Whether you're craving your favorite comfort food or eager to try something new, Foodie has something for everyone. Join our community of food lovers today!</p>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock content %}

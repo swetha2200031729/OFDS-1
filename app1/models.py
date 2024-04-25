@@ -21,6 +21,7 @@ class Restaurant(models.Model):
     image = models.ImageField(null = True)
     cuisines = models.ManyToManyField(to = "Cuisine")
     location_url = models.URLField(null = True)
+    @property
     def image_url(self):
         return self.image.url
     def __str__(self):
@@ -28,8 +29,22 @@ class Restaurant(models.Model):
 
 class UserPhone(models.Model):
     user = models.OneToOneField(to = User, on_delete= models.CASCADE)
-    phone = models.CharField(max_length=10,unique=True)
+    phone = models.CharField(max_length=15,unique=True)
     def __str__(self):
         return self.user.username
+
+class CartItem(models.Model):
+    fooditem = models.ForeignKey(to = "FoodItem",on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    user = models.ForeignKey(to = User ,on_delete=models.CASCADE)
+    @property
+    def subtotal(self):
+        return self.quantity * self.fooditem.price   #if self is the only parameter then u can use it as property
+
+    def __str__(self):
+        return f"{self.user.username} {self.fooditem.name}"
+    class Meta:
+        unique_together = ("fooditem" ,"user")
+
 
 #https://www.google.com/maps/embed/v1/place?q=place_id:ChIJv58o7br6NToROPPDiCZ-HTU&key=AIzaSyDYuTnqsw7E-uUMYCr4P9AJSnP353TxPLY

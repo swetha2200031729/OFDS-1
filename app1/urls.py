@@ -10,5 +10,13 @@ urlpatterns = [
     path('signup',signup_page,name = 'signup'),
     path('restaurant',restaurant,name = "restaurant"),
     path('restaurant-menu/<int:id>',restaurant_menu,name = "restaurant_menu"),
-    path('userprofile',user_profile,name = "userprofile")
+    path('userprofile',user_profile,name = "userprofile"),
+    path('cart',cart,name = "cart"),
+    path('additemtocart/<int:fooditem_id>',add_item_to_cart,name ='add_cart_item'),
+    path('removeitemfromcart/<int:fooditem_id>',remove_item_from_cart,name ="remove_cart_item"),
+    path('deleteitemfromcart/<int:fooditem_id>',delete_item_from_cart,name = "delete_cart_item"),
+    path('ordersuccessful',ordersuccessful,name = "oedersuccessful"),
+    path('aboutus',aboutus,name ="aboutus"),
+    path('checkout',checkout,name = 'checkout'),
 ]
+# another work login andsign up okok

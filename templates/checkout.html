@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
 <style>
   .form-signin {
@@ -96,27 +97,56 @@
 
 
 
-
 <main class="form-signin w-100 m-auto">
   <form method = "POST">
     {% csrf_token %}
-    <h1 class="h3 mb-3 fw-normal">LOGIN</h1>
+    <h1 class="h3 mb-3 fw-normal">Check Out</h1>
     <div class="form-floating">
-      <input type="text" class="form-control" id="floatingtextname " name = "nm" placeholder="name@example.com" maxlength="50" minlength="6">
-      <label for="floatingInput">User Name</label>
+      <input type="text" class="form-control" id="floatingtextname " name = "name" placeholder="name">
+      <label for="floatingInput">Name</label>
+    </div>
+      <div class="form-floating">
+      <input type="text" class="form-control" id="phone " name = "phone" placeholder="Number" >
+      <label for="floatingInput">Phone.No</label>
+    </div>
+    <div class="form-floating">
+      <input type="text" class="form-control" id="address" name = "address" placeholder="address">
+      <label for="floatingInput">Address</label>
+    </div>
+      <h5> Payment-Method</h5>
+    <div class="form-check form-check-inline">
+
+  <input class="form-check-input" type="radio" id="inlineCheckbox1" value="upi" name="payment">
+  <label class="form-check-label" for="inlineCheckbox1">UPI</label>
+</div>
+    </br>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" id="inlineCheckbox2" value="netbanking" name = "payment">
+  <label class="form-check-label" for="inlineCheckbox2">Net-banking</label>
+</div>
+    </br>
+    <div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" id="inlineCheckbox3" value="cod" name = "payment">
+  <label class="form-check-label" for="inlineCheckbox2">cash-on-delivery</label>
+</div>
+<div class="form-floating">
+      <input type="text" class="form-control" id="bill" name = "bill" placeholder="Amount" >
+      <label for="floatingInput">Total Amount</label>
+    </div>
+    <div class="form-floating">
+      <input type="text" class="form-control" id="Items" name = "items" placeholder="Number of Items" >
+      <label for="floatingInput">Number of Items</label>
     </div>
 
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" name = 'pwd' placeholder="Password" maxlength="50" minlength="5">
-      <label for="floatingPassword">Password</label>
-    </div>
+    <button class="btn btn-primary w-100 py-2" type="submit">Place an order :)</button>
+      <br/>
+      <br/>
+    <a class="btn btn-primary w-100 py-2" href="{% url 'cart' %}">Back to cart</a>
 
-
-    <button class="btn btn-primary w-100 py-2" type="submit">Login</button>
-     <a href = "signup" >Don't have an account?</a>
   </form>
 </main>
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
 
 {% endblock content %}
+
