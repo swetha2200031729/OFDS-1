@@ -172,9 +172,6 @@ def cuisines(request):
 def aboutus(request):
     return render(request,"aboutus.html")
 
-def order(request):
-    cart_item = CartItem.object.filter(user = request.user)
-    order = Order()
-    if request.method == 'POST':
-        pass
+
+
 
