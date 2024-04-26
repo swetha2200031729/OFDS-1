@@ -1,6 +1,3 @@
-
-{% load static %}
-
 <style>
    body{
     background: #ddd3;
@@ -43,8 +40,10 @@
     padding: 0;
 }
 #heading{
-    color: grey;
+    color: black;
     line-height: 6vh;
+    font-size: 20px;
+    font-weight: bold;
 }
 .pricing{
     background-color: #ddd3;
@@ -79,6 +78,8 @@
     display: flex;
     padding: 3vh 0 0;
     align-items: center;
+    font-size:150%;
+
 }
 .footer .row{
     margin: 0;
@@ -186,25 +187,52 @@
 #progressbar li.active:after {
     background: rgb(252, 103, 49);
 }
+
+
+#helpButton {
+    background-color: #4CAF50; /* Green background */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-right: 10px; /* Add some space between button and link */
+    border-radius:8px;
+
+}
+
+#contact{
+  text-decoration:none;
+
+}
+
+
 </style>
 <div class="card">
             <div class="title">Purchase Reciept</div>
             <div class="info">
                 <div class="row">
                     <div class="col-7">
-                        <span id="heading">Date</span><br>
+
+                        <span id="heading">Name</span><br>
                         <span id="details">10 October 2018</span>
                     </div>
                     <div class="col-5 pull-right">
-                        <span id="heading">Order No.</span><br>
+                        <span id="heading">Phone no.</span><br>
                         <span id="details">012j1gvs356c</span>
                     </div>
+                    <div class="col-5 pull-right">
+                      <span id="heading">Order id.</span><br>
+                      <span id="details">012j1gvs356c</span>
+                  </div>
                 </div>
             </div>
             <div class="pricing">
                 <div class="row">
                     <div class="col-9">
-                        <span id="name">BEATS Solo 3 Wireless Headphones</span>
+                        <span id="name">Amount</span>
                     </div>
                     <div class="col-3">
                         <span id="price">&pound;299.99</span>
@@ -212,36 +240,29 @@
                 </div>
                 <div class="row">
                     <div class="col-9">
-                        <span id="name">Shipping</span>
+                        <span id="name">No. of Items</span>
                     </div>
                     <div class="col-3">
-                        <span id="price">&pound;33.00</span>
+                        <span id="price"></span>
                     </div>
                 </div>
             </div>
-            <div class="total">
-                <div class="row">
-                    <div class="col-9"></div>
-                    <div class="col-3"><big>&pound;262.99</big></div>
-                </div>
-            </div>
-            <div class="tracking">
-                <div class="title">Tracking Order</div>
-            </div>
-            <div class="progress-track">
-                <ul id="progressbar">
-                    <li class="step0 active " id="step1">Ordered</li>
-                    <li class="step0 active text-center" id="step2">Shipped</li>
-                    <li class="step0 active text-right" id="step3">On the way</li>
-                    <li class="step0 text-right" id="step4">Delivered</li>
-                </ul>
-            </div>
+
+            <div class="row"  align="center" >
+              <div class="col-10" >
+                  <button id="helpButton">Order Successful</button> <!-- Added button -->
+
+              </div>
+          </div>
+
+
+
 
 
             <div class="footer">
                 <div class="row">
-                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/YBWc55P.png"></div>
-                    <div class="col-10">Want any help? Please &nbsp;<a> contact us</a></div>
+
+                    <div class="col-10">Want any help? Please &nbsp;<a href="{% url 'contactus' %}"  >contact us</a></div>
                 </div>
 
 

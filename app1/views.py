@@ -4,6 +4,7 @@ from .models import *
 from django.core.mail import send_mail
 from .forms import SubscribeForm
 from django.contrib import messages
+import razorpay
 
 # Create your views here.
 def homepage(request):
@@ -145,11 +146,61 @@ def delete_item_from_cart(request,fooditem_id):
     return redirect('cart')
 
 def ordersuccessful(request):
+
     return render(request,"ordersuccessful.html")
 def aboutus(request):
     return render(request,"About.html")
 def checkout(request):
-    return render(request,"checkout.html")
+    if not request.user.is_authenticated:
+        return redirect('login')
+    cart_items = CartItem.objects.filter(user=request.user)
+    order = Order()
+    if request.method == 'POST':
+        name = request.POST['name']
+        phone = request.POST['phone']
+        address = request.POST['address']
+        print(name, phone, address)
+
+        # Populate the Order instance with form data
+        order.name = name
+        order.phone = phone
+        order.address = address
+        order.user = request.user
+        order.save()
+
+        # Save order items
+        total_amount = 0.0
+        total_items = 0
+        for cart_item in cart_items:
+            order_item = OrderItem()
+            order_item.fooditem = cart_item.fooditem
+            order_item.quantity = cart_item.quantity
+            order_item.order = order
+            order_item.save()
+
+            # Calculate total amount and total items
+            total_amount += cart_item.subtotal
+            total_items += cart_item.quantity
+
+            # Delete cart item after adding to order
+            cart_item.delete()
+
+        return redirect('ordersuccessful')
+    cart_items = CartItem.objects.filter(user=request.user)
+    # add of subtotal
+    total_value = 0.0
+    total_items = 0
+    for cart_item in cart_items:
+        total_value += cart_item.subtotal
+        total_items += cart_item.quantity
+    context = {"cart_items": cart_items, "total_value": total_value, "total_items": total_items}
+    # razorpay part
+    if request.method == "POST":
+        amount = 50000
+        order_currency = 'INR'
+        client = razorpay.Client(auth=('rzp_test_FKt3tBBAF5wSqQ', '2MaBVwNfTYXM4M3BozlX0zh3'))
+        payment = client.order.create({'amount': amount, 'currency': 'INR', 'payment_capture': '1'})
+    return render(request,"checkout.html",context)
 
 def contactus(request):
     form = SubscribeForm()
@@ -171,11 +222,4 @@ def cuisines(request):
     return render(request,'cuisines.html')
 def aboutus(request):
     return render(request,"aboutus.html")
-
-
-def order(request):
-    cart_item = CartItem.object.filter(user = request.user)
-    order = Order()
-    if request.method == 'POST':
-        user = request.
 

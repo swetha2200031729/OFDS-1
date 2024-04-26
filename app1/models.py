@@ -66,9 +66,8 @@ Order (foreign key)
 Subtotal(propertu method)
 '''
 class Order(models.Model):
-    fooditem = models.ForeignKey(to="FoodItem", on_delete=models.CASCADE)
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
-    order_placed_time = models.DateTimeField(blank = True)
+    order_placed_time = models.DateTimeField(blank = True,auto_now_add=True)
     delivary_name = models.CharField(max_length = 100)
     delivary_phone = models.CharField(max_length= 100)
     delivary_address = models.TextField()
