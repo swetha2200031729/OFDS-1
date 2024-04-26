@@ -146,8 +146,8 @@ def delete_item_from_cart(request,fooditem_id):
     return redirect('cart')
 
 def ordersuccessful(request):
-
-    return render(request,"ordersuccessful.html")
+    data=Order.objects.last()
+    return render(request,"ordersuccessful.html", {"data":data})
 def aboutus(request):
     return render(request,"About.html")
 def checkout(request):
@@ -193,13 +193,14 @@ def checkout(request):
     for cart_item in cart_items:
         total_value += cart_item.subtotal
         total_items += cart_item.quantity
+        # new_total_value = total_value *100
     context = {"cart_items": cart_items, "total_value": total_value, "total_items": total_items}
     # razorpay part
-    if request.method == "POST":
-        amount = 50000
-        order_currency = 'INR'
-        client = razorpay.Client(auth=('rzp_test_FKt3tBBAF5wSqQ', '2MaBVwNfTYXM4M3BozlX0zh3'))
-        payment = client.order.create({'amount': amount, 'currency': 'INR', 'payment_capture': '1'})
+    # if request.method == "POST":
+    #     amount = 50000
+    #     order_currency = 'INR'
+    #     client = razorpay.Client(auth=('rzp_test_FKt3tBBAF5wSqQ', '2MaBVwNfTYXM4M3BozlX0zh3'))
+    #     payment = client.order.create({'amount': amount, 'currency': 'INR', 'payment_capture': '1'})
     return render(request,"checkout.html",context)
 
 def contactus(request):
@@ -223,3 +224,7 @@ def cuisines(request):
 def aboutus(request):
     return render(request,"aboutus.html")
 
+def my_orders(request):
+    orders = Order.objects.filter(user=request.user)
+    context = {'orders': orders}
+    return render(request, 'orders.html', context)

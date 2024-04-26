@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  {% for order in orders %}
+<center>
+    <div class = "container m-4 ">
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <center>Order : {{order.id}}</center>
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+{% for orderitem in order.get_order_items %}
+                 <tr>
+                        <td data-th="Product">
+                            <div class="row">
+                                <div class="col-md-3 text-left">
+                                    <img src="{{orderitem.fooditem.image_url}}" alt="" class="img-fluid d-none d-md-block rounded mb-2 shadow ">
+                                </div>
+                                <div class="col-md-9 text-left mt-sm-2">
+                                    <h4>order item : {{orderitem.fooditem.name}}</h4>
+                                    <p class="font-weight-light">{{orderitem.fooditem.restaurant.name}}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td data-th="Price">{{orderitem.subtotal}}</td>
+                        <td data-th="Quantity">
+                          order quantity : {{orderitem.quantity}}
+                        </td>
+
+                    </tr>
+                {% endfor %}
+      </div>
+
+    </div>
+</div>
+</div>
+</div>
+{% endfor %}
+</center>
+{% endblock content %}

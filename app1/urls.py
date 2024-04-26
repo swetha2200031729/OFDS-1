@@ -21,6 +21,8 @@ urlpatterns = [
     path('contactus',contactus,name="contactus"),
     path('cuisines',cuisines,name="cuisines"),
     path('aboutus',aboutus,name="aboutus"),
+    path('myorders',my_orders,name = 'myorders'),
+
 
 ]
 # another work login andsign up okok

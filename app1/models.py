@@ -71,7 +71,10 @@ class Order(models.Model):
     delivary_name = models.CharField(max_length = 100)
     delivary_phone = models.CharField(max_length= 100)
     delivary_address = models.TextField()
-
+    @property
+    def get_order_items(self):
+        orderitems = OrderItem.objects.filter(order=self)
+        return orderitems
     def __str(self):
         return f"{self.user.username} {self.delivay_name}"
 
@@ -85,4 +88,4 @@ class OrderItem(models.Model):
         return self.quantity * self.fooditem.price  # if self is the only parameter then u can use it as property
 
     def __str__(self):
-        return f"{self.order.id} {self.fooditem.name}"
+        return f"{self.order.id} {self.fooditem.name} {self.order.user}"
