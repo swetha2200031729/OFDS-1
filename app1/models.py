@@ -48,3 +48,42 @@ class CartItem(models.Model):
 
 
 #https://www.google.com/maps/embed/v1/place?q=place_id:ChIJv58o7br6NToROPPDiCZ-HTU&key=AIzaSyDYuTnqsw7E-uUMYCr4P9AJSnP353TxPLY
+'''Model lo
+
+Order
+
+User
+Order placed at (datetimefirld)
+Name
+Contact
+Address
+
+Orderitem
+Fooditem
+Quantity
+Order (foreign key)
+
+Subtotal(propertu method)
+'''
+class Order(models.Model):
+    fooditem = models.ForeignKey(to="FoodItem", on_delete=models.CASCADE)
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    order_placed_time = models.DateTimeField(blank = True)
+    delivary_name = models.CharField(max_length = 100)
+    delivary_phone = models.CharField(max_length= 100)
+    delivary_address = models.TextField()
+
+    def __str(self):
+        return f"{self.user.username} {self.delivay_name}"
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(to = "Order", on_delete=models.CASCADE)                      #OrderItem.order.user
+    fooditem = models.ForeignKey(to="FoodItem", on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+
+    @property
+    def subtotal(self):
+        return self.quantity * self.fooditem.price  # if self is the only parameter then u can use it as property
+
+    def __str__(self):
+        return f"{self.order.id} {self.fooditem.name}"

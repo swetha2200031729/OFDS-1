@@ -6,5 +6,8 @@ admin.site.register(FoodItem)
 admin.site.register(Restaurant)
 admin.site.register(Cuisine)
 admin.site.register(UserPhone)
+admin.site.register(CartItem)
+admin.site.register(Order)
+admin.site.register(OrderItem)
 
 # Register your models here.

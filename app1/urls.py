@@ -18,5 +18,9 @@ urlpatterns = [
     path('ordersuccessful',ordersuccessful,name = "oedersuccessful"),
     path('aboutus',aboutus,name ="aboutus"),
     path('checkout',checkout,name = 'checkout'),
+    path('contactus',contactus,name="contactus"),
+    path('cuisines',cuisines,name="cuisines"),
+    path('aboutus',aboutus,name="aboutus"),
+
 ]
 # another work login andsign up okok

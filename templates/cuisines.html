@@ -1,0 +1,167 @@
+ {% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Irish+Grover&display=swap">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Navbar Buttons</title>
+<style>
+    .image{
+      position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1; /* Ensure it's behind other content */
+    }
+    /* Group 21 */
+    .navbar-button-1 {
+        position: absolute;
+        font-family: 'Irish Grover';
+        font-size: 32px;
+        width: 400px;
+        height: 60px;
+        left: 278px;
+        top: 10px;
+        background-color: #88AB8E; /* Example background color */
+        color: #1E1E1E; /* Example text color */
+        text-align: center; /* Align text in the center */
+        line-height: 60px; /* Adjust line-height accordingly */
+        text-decoration: none;
+        cursor: pointer;
+        border-radius: 30px;
+        border: 3px solid #000000;
+    }
+
+    /* Group 27 */
+    .navbar-button-2 {
+        position: absolute;
+        font-family: 'Irish Grover';
+        font-size: 32px;
+        width: 300px;
+        height: 60px;
+        left: 818px;
+        top: 10px;
+        background-color: #88AB8E; /* Example background color */
+        color: #1E1E1E; /* Example text color */
+        text-align: center; /* Align text in the center */
+        line-height: 60px; /* Adjust line-height accordingly */
+        text-decoration: none;
+        cursor: pointer;
+        border-radius: 30px;
+        border: 3px solid #000000;
+    }
+
+    .nav1 {
+        position: fixed; /* Fixed position to keep it fixed on the screen */
+        top: 0; /* Position it at the top */
+        left: 0; /* Position it at the left */
+        width: 100%; /* Full width */
+        height: 50px; /* Adjust height as needed */
+        background-color: rgba(248, 249, 250, 0.9); /* Example background color */
+        padding: 20px; /* Adjust padding as needed */
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Example box shadow */
+        z-index: 1000; /* Set z-index to ensure it's above other content */
+    }
+
+    .nav1 a:hover {
+        color: #007bff; /* Example color on hover */
+    }
+
+    .card-container {
+        margin-top: 100px; /* Adjust margin-top to create space between navbar and cards */
+        display: flex;
+        flex-wrap: wrap; /* Ensure cards wrap to new row when there's not enough space */
+        justify-content: space-around; /* Adjust space between cards */
+    }
+
+    .card {
+        width: 300px; /* Adjust card width as needed */
+        margin-bottom: 20px; /* Adjust space between cards vertically */
+        border: 3px solid black; /* Example border */
+        border-radius: 15px; /* Example border radius */
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Example box shadow */
+        background-color: rgba(248, 249, 250, 1);
+        transition: box-shadow 0.3s ease, transform 0.3s ease; /* Transition for box-shadow and transform */
+        transform-style: preserve-3d; /* Ensure 3D transformations are preserved */
+    }
+
+    .card:hover {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Adjusted box shadow on hover */
+        transform: translateY(-5px); /* Move the card slightly up on hover */
+    }
+
+    .card img {
+        width: 100%; /* Make image fill the card */
+        border-top-left-radius: 5px; /* Ensure rounded corners for image */
+        border-top-right-radius: 5px; /* Ensure rounded corners for image */
+        border-radius: 15px; /* Example border radius */
+    }
+
+    .card-content {
+        padding: 20px;
+    }
+</style>
+</head>
+<body>
+  <img class="image" src="{% static '/images/servicebg.jpeg' %}">
+
+  <div class="card-container">
+    <div class="row">
+        <div class="card">
+            <img src="{% static '/images/indianc.jpg' %}" alt="Image 1">
+            <div class="card-content">
+                <h3>Step 1</h3>
+                <p>Some description about card 1.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="{% static '/images/chinesec.jpg' %}" alt="Image 2">
+            <div class="card-content">
+                <h3>Step 2</h3>
+                <p>Some description about card 2.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="{% static '/images/restaurant_1.jpg' %}" alt="Image 3">
+            <div class="card-content">
+                <h3>Step 3</h3>
+                <p>Some description about card 3.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="{% static '/images/restaurant_1.jpg' %}" alt="Image 4">
+            <div class="card-content">
+                <h3>Step 4</h3>
+                <p>Some description about card 4.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="{% static '/images/restaurant_1.jpg' %}" alt="Image 4">
+            <div class="card-content">
+                <h3>Step 4</h3>
+                <p>Some description about card 4.</p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="{% static '/images/restaurant_1.jpg' %}" alt="Image 4">
+            <div class="card-content">
+                <h3>Step 4</h3>
+                <p>Some description about card 4.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add more rows for additional cards -->
+  </div>
+</body>
+</html>
+{% endblock content %}

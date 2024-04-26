@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import *
 from .models import *
+from django.core.mail import send_mail
+from .forms import SubscribeForm
+from django.contrib import messages
+
 # Create your views here.
 def homepage(request):
     return render(request,'home.html')
@@ -70,7 +74,7 @@ def signup_page(request):
 
 
         if confirm_password != password:
-            redirect('signup')
+            return redirect('signup')
 
         user = User.objects.create_user( username=username,first_name = name ,email = email, password=password)
         user.save()
@@ -146,3 +150,31 @@ def aboutus(request):
     return render(request,"About.html")
 def checkout(request):
     return render(request,"checkout.html")
+
+def contactus(request):
+    form = SubscribeForm()
+    if request.method == 'POST':
+        form = SubscribeForm(request.POST)
+        if form.is_valid():
+            subject = 'issues'
+            prob = request.POST.get('problem')
+            message = prob
+            recipient = form.cleaned_data.get('email')
+            send_mail(subject,
+                      message, settings.EMAIL_HOST_USER, [recipient], fail_silently=False)
+            messages.success(request, 'mail sent successfully')
+            return redirect('contactus')
+    return render(request, 'contactus.html', {'form': form})
+
+
+def cuisines(request):
+    return render(request,'cuisines.html')
+def aboutus(request):
+    return render(request,"aboutus.html")
+
+def order(request):
+    cart_item = CartItem.object.filter(user = request.user)
+    order = Order()
+    if request.method == 'POST':
+        pass
+

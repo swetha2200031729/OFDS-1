@@ -12,43 +12,49 @@
   <body>
     <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Foodie <i class="fa-solid fa-utensils"></i> </a>
+        <a class="navbar-brand" href="{% url 'homepage' %}">Foodie <i class="fa-solid fa-utensils"></i> </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarColor02">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <a class="nav-link active" href="#">Home
+              <a class="nav-link active" href="{% url 'homepage' %}">Home
                 <span class="visually-hidden">(current)</span>
               </a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="#">Cart</a>
+              <a class="nav-link" href="{% url 'cart' %}">Cart</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#"></a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Services</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">About Us</a>
+                <a class="dropdown-item" href="{% url 'aboutus' %}">About Us</a>
                 <a class="dropdown-item" href="{% url 'menu_page' %}">Menu</a>
+                <a class="dropdown-item" href="{% url 'contactus' %}">Contact Us</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{% url 'restaurant' %}">Restaurants</a>
+                <a class="dropdown-item" href="{% url 'cuisines' %}">Cuisines</a>
               </div>
             </li>
           </ul>
-            {% if user.is_authenticated %}
-          <a href = "{% url 'userprofile' %}" class="btn btn-secondary my-2 my-sm-0 mx-5" >User Profile</a>
+
+        </div>
+        {% if user.is_authenticated %}
+         <form class="d-flex my-2">
+            <a class="btn btn-secondary my-2 my-sm-0" href="{% url 'userprofile' %}">User Profile</a>
+          </form>
         <a href = "{% url 'logout' %}" class="btn btn-secondary my-2 my-sm-0 mx-5" >Logout</a>
         {% endif %}
-          </div>
       </div>
     </nav>
 
+
     {% block content %}{% endblock content %}
+
   </body>
 
 </html>
