@@ -53,6 +53,8 @@ def login_user(request):
         user = authenticate(request,username = username,password = password )
         if user is not None:
             login(request,user)
+            if username == 'adminn':
+                return render(request,'adminappt/home.html')
             return redirect('homepage')
         else:
             return redirect("login")

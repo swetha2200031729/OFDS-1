@@ -1,0 +1,42 @@
+{% include 'adminappt/navbar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table class="table table-striped table-bordered">
+  <tr>
+
+    <th>FOOD ITEM NAME</th>
+    <th>DESCRIPTION</th>
+    <th>PRICE</th>
+    <th>RESTAURANT</th>
+      <th>DELETE</th>
+        <th>UPDATE</th>
+  </tr>
+{% for fooditem in fooditems %}
+    <tr>
+    <td>{{fooditem.name}}</td>
+    <td>{{fooditem.description}}</td>
+    <td>{{fooditem.price}}</td>
+    <td>{{fooditem.restaurant}}</td>
+    <td>
+    <form method="POST" action="{% url 'delete' %}">
+          {% csrf_token %}
+          <input type="hidden" name="obj_id" value="{{ fooditem.id }}">
+          <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+    </td>
+    <td>
+        <form method="POST" action="{% url 'update' fooditem.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+</body>
+</html>

@@ -19,7 +19,7 @@ class Restaurant(models.Model):
     name = models.CharField(max_length = 100,unique = True)
     address = models.TextField()
     image = models.ImageField(null = True)
-    cuisines = models.ManyToManyField(to = "Cuisine")
+    # cuisines = models.ManyToManyField(to = "Cuisine")
     location_url = models.URLField(null = True)
     @property
     def image_url(self):

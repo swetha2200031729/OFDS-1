@@ -1,0 +1,38 @@
+{% include 'adminappt/navbar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Phone Management</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>USER</th>
+        <th>PHONE</th>
+        <th>DELETE</th>
+        <th>UPDATE</th>
+    </tr>
+
+{% for up in UserPhones %}
+    <tr>
+<td>{{ up.user }}</td>
+<td>{{  up.phone }}</td>
+    <td>
+        <form method="POST" action="{% url 'deleteuserphonemanagement' %}">
+          {% csrf_token %}
+          <input type="hidden" name="obj_id" value="{{ restaurant.id }}">
+          <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+    </td>
+    <td>
+        <form method="POST" action="{% url 'updateuserphonemanagement' restaurant.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </td>
+</tr>
+{% endfor %}
+</table>
+</body>
+</html>
