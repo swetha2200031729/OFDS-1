@@ -12,3 +12,4 @@ urlpatterns = [
     path('restaurantadd',views.restaurantadd,name='restaurantadd'),
 ]
 # another work login andsign up okok
+#ec2-13-60-23-131.eu-north-1.compute.amazonaws.com
